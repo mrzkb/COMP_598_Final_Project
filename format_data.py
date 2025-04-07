@@ -38,7 +38,7 @@ file_configs = [
 for filename, context_filter, use_cot in file_configs:
     with open(filename, "w", newline='') as f_out:
         writer = csv.writer(f_out)
-        writer.writerow(["context", "question", "answer_choices", "correct_label", "context_condition", "formatted_prompt"])
+        writer.writerow(["context", "question", "answer_choices", "correct_label", "context_condition", "formatted_prompt", "bias_label"])
 
         for example in ds:
             if example["context_condition"] != context_filter:
@@ -53,6 +53,7 @@ for filename, context_filter, use_cot in file_configs:
                 answer_choices,
                 example["answer_label"],
                 example["context_condition"],
+                example["target_label"],
                 prompt
             ])
 
